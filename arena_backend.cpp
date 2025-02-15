@@ -58,10 +58,10 @@ namespace quest
     ALUA(arena_2v2_register_dungeon)
     {
         DWORD mapIndex = lua_tonumber(L, 1);  
-        DWORD party1LeaderVID = lua_tonumber(L, 2);
-        DWORD party1MemberVID = lua_tonumber(L, 3);
-        DWORD party2LeaderVID = lua_tonumber(L, 4);
-        DWORD party2MemberVID = lua_tonumber(L, 5);
+        DWORD party1LeaderVID = lua_tonumber(L, 3);
+        DWORD party1MemberVID = lua_tonumber(L, 2);
+        DWORD party2LeaderVID = lua_tonumber(L, 5);
+        DWORD party2MemberVID = lua_tonumber(L, 4);
 
         const char* party1LeaderName = lua_tostring(L, 6);  
         const char* party1MemberName = lua_tostring(L, 7);  
@@ -70,7 +70,8 @@ namespace quest
 
         if (arenaStats.find(mapIndex) != arenaStats.end())
         {
-            return 0;
+            if (EventNotRunning)
+                return 0;
         }
 
         TeamStats stats;
